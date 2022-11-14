@@ -1,4 +1,14 @@
-<div class="container">
-	<h1>Title</h1>
-	<p><%= @post %></p>
+<div class="container mt-6">
+	<h1>Parsing Markdown With Sinatra & Redcarpet</h1>
+	<hr>
+	<div>
+		<h3>Input</h3>
+	<!-- input form -->
+	  	<form method='POST' action='/parse_md'>
+	  		<div class="mb-3">
+	  			<textarea rows="10" class="form-control" name="md_input" placeholder="Enter your Markdown here"></textarea>
+	  		</div>
+		  <input type="submit" class="btn btn-primary" value="Parse Markdown" />
+		</form><!--//form-->		
+	</div>
 </div>
