@@ -1,8 +1,11 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'redcarpet'
+require_relative './lib/helpers/custom_parser'
 
 class Main < Sinatra::Application
+	# include custom MD parsing helper
+	helpers Sinatra::CustomParser	
 
   get '/' do
     erb :index, layout: :layout
@@ -14,7 +17,8 @@ class Main < Sinatra::Application
   	markdown = Redcarpet::Markdown.new(renderer, extensions = {})
 
   	input = params[:md_input]
-  	@post = markdown.render(input)
+  	# @post = markdown.render(input)
+  	@post = md_parse(input)
 
   	erb :parse_md, layout: :layout
   end
