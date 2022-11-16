@@ -10,9 +10,9 @@ class Main < Sinatra::Application
     erb :index, layout: :layout
   end
 
-  post '/parse_md' do
+  post '/output' do
   	input = params[:md_input]
-    @output = md_parse(input)
+    @output = markdown_output(input)
 
   	erb :parse_md, layout: :layout
   end
