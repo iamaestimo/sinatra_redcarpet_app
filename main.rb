@@ -12,7 +12,7 @@ class Main < Sinatra::Application
 
   post '/parse_md' do
   	input = params[:md_input]
-    @post = md_parse(input)
+    @output = md_parse(input)
 
   	erb :parse_md, layout: :layout
   end
