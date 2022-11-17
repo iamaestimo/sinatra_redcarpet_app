@@ -1,20 +1,28 @@
 require 'sinatra/base'
 require 'redcarpet'
+require 'coderay'
 
 
 module Sinatra
   module CustomParser
 
-    def markdown_output(input)
-      # define basic MD renderer
-      renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
-      markdown = Redcarpet::Markdown.new(renderer, extensions = {})
-      output = markdown.render(input)
-
-      # return parsed output
-      output
+    class Markdownray < Redcarpet::Render::HTML
+     def block_code(code, language)
+       CodeRay.scan(code, language).div
+     end
     end
-
+   
+     def convert_markdown(text)
+       rndr = Markdownray.new(:filter_html => true, :hard_wrap => true)
+       options = {
+         fenced_code_blocks: true,
+         no_intra_emphasis: true,
+         autolink: true,
+         lax_html_blocks: true
+       }
+       markdown_to_html = Redcarpet::Markdown.new(rndr, options)
+       markdown_to_html.render(text)
+     end
   end
 
   helpers CustomParser

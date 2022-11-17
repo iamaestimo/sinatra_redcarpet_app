@@ -3,7 +3,7 @@ require 'sinatra/reloader' if development?
 require_relative './lib/helpers/custom_parser'
 
 class Main < Sinatra::Application
-	# include custom MD parsing helper
+	# include custom helpers for parsing Markdown
 	helpers Sinatra::CustomParser	
 
   get '/' do
@@ -12,9 +12,9 @@ class Main < Sinatra::Application
 
   post '/output' do
   	input = params[:md_input]
-    @output = markdown_output(input)
+    @output = convert_markdown(input)
 
-  	erb :parse_md, layout: :layout
+  	erb :markdown_output, layout: :layout
   end
 
 end
